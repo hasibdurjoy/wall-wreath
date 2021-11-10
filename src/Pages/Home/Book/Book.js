@@ -12,14 +12,14 @@ const Book = () => {
     const [product, setProduct] = useState({});
     const { user } = useAuth();
     const [bookingSuccess, setBookingSuccess] = useState(false);
-    const [loginData, setLoginData] = useState({});
+    const [bookingData, setBookingData] = useState({});
 
     const handleOnChange = e => {
         const field = e.target.name;
         const value = e.target.value;
-        const newLoginData = { ...loginData };
-        newLoginData[field] = value;
-        setLoginData(newLoginData);
+        const newBookingData = { ...bookingData };
+        newBookingData[field] = value;
+        setBookingData(newBookingData);
     }
 
     useEffect(() => {
@@ -29,16 +29,18 @@ const Book = () => {
     }, []);
 
     const handleBooking = e => {
-        console.log(loginData);
+        console.log(bookingData);
         const booking = {
             displayName: user.displayName,
             email: user.email,
-            ...loginData,
+            ...bookingData,
             productName: product.name,
             productId: product._id,
             productPrice: product.price,
+            productImage: product.img,
             status: "pending",
         }
+
         console.log(booking);
         fetch('https://salty-ravine-02871.herokuapp.com/bookings', {
             method: "POST",

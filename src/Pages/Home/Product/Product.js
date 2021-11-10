@@ -14,7 +14,6 @@ const Product = ({ product }) => {
         setSeeMore(true);
     }
     const handleClick = (id) => {
-        console.log('clicked', id);
         history.push(`products/${id}`)
     }
     return (

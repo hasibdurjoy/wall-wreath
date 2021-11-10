@@ -4,24 +4,24 @@ import Review from '../Review/Review';
 
 const reviews = [
     {
-        name: "durjoy",
-        comment: "very good",
-        rating: "4",
-        img: "https://prestashop.mahardhi.com/MT04/artiem/modules/mt_testimonials/images/sample-2.jpg"
+        name: "Fazle Rabbi Talukder",
+        comment: "This a very good and trusted shop",
+        rating: "5",
+        img: "https://i.ibb.co/DpybPCR/Screenshot-4.png"
     },
 
     {
-        name: "durjoy",
-        comment: "very good",
+        name: "Hridoy Star Lord",
+        comment: "very good and trusted shop I have ever seen",
         rating: "4",
-        img: "https://prestashop.mahardhi.com/MT04/artiem/modules/mt_testimonials/images/sample-2.jpg"
+        img: "https://i.ibb.co/KzJvs2x/Screenshot-5.png"
     },
 
     {
-        name: "durjoy",
-        comment: "very good",
-        rating: "4",
-        img: "https://img.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg?size=626&ext=jpg"
+        name: "Towfiq Demon",
+        comment: "rheir shop is very good. and product are very high quality",
+        rating: "4.9",
+        img: "https://i.ibb.co/Sc1TyP0/Screenshot-6.png"
     },
 
 ]

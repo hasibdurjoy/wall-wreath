@@ -17,7 +17,7 @@ import { AppBar, Button, IconButton, Typography } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
 import Pay from '../Pay/Pay';
 import BookingList from '../BookingList/BookingList';
-import Review from '../Review/Review';
+import Feedback from '../Feedback/Feedback';
 
 
 const drawerWidth = 150;
@@ -114,7 +114,7 @@ function Dashboard(props) {
                     <Route exact path={path}><Pay /></Route>
                     <Route path={`${path}/pay`}><Pay /></Route>
                     <Route path={`${path}/myOrders`}><BookingList /></Route>
-                    <Route path={`${path}/review`}><Review /></Route>
+                    <Route path={`${path}/review`}><Feedback /></Route>
                 </Switch>
             </Box>
         </Box>
