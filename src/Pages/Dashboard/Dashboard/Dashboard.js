@@ -18,9 +18,6 @@ import useAuth from '../../../hooks/useAuth';
 import Pay from '../Pay/Pay';
 import BookingList from '../BookingList/BookingList';
 import Review from '../Review/Review';
-/* import Book from '../Book/Book';
-import BookingList from '../BookingList/BookingList';
-import Review from '../Review/Review'; */
 
 
 const drawerWidth = 150;

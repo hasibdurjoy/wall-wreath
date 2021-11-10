@@ -12,6 +12,15 @@ const Book = () => {
     const [product, setProduct] = useState({});
     const { user } = useAuth();
     const [bookingSuccess, setBookingSuccess] = useState(false);
+    const [loginData, setLoginData] = useState({});
+
+    const handleOnChange = e => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData };
+        newLoginData[field] = value;
+        setLoginData(newLoginData);
+    }
 
     useEffect(() => {
         fetch(`https://salty-ravine-02871.herokuapp.com/products/${productId}`)
@@ -20,12 +29,18 @@ const Book = () => {
     }, []);
 
     const handleBooking = e => {
+        console.log(loginData);
         const booking = {
             displayName: user.displayName,
             email: user.email,
+            ...loginData,
+            productName: product.name,
+            productId: product._id,
+            productPrice: product.price,
             status: "pending",
         }
-        fetch('https://ancient-springs-79733.herokuapp.com/bookings', {
+        console.log(booking);
+        fetch('https://salty-ravine-02871.herokuapp.com/bookings', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -63,15 +78,17 @@ const Book = () => {
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
                 <TextField
+                    onBlur={handleOnChange}
                     required
                     label="Address"
                     id="outlined-basic"
                     type="texts"
-                    name="name"
+                    name="address"
                     variant="outlined"
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
                 <TextField
+                    onBlur={handleOnChange}
                     required
                     label="Phone"
                     id="outlined-basic"
