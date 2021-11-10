@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { Button, Container, FormControlLabel, FormLabel, TextField, Typography } from '@mui/material';
-import { Box, fontWeight } from '@mui/system';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
+import { useHistory, useParams } from 'react-router';
+import { Button, Container, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import Alert from '@mui/material/Alert';
 import useAuth from '../../../hooks/useAuth';
 
@@ -13,6 +11,7 @@ const Book = () => {
     const { user } = useAuth();
     const [bookingSuccess, setBookingSuccess] = useState(false);
     const [bookingData, setBookingData] = useState({});
+    const history = useHistory();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -59,6 +58,9 @@ const Book = () => {
         e.preventDefault();
     }
 
+    if (bookingSuccess) {
+        history.push("/");
+    }
     return (
         <Container sx={{ width: "50%", pb: 3, mx: 'auto' }} >
             <form onSubmit={handleBooking}>

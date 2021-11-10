@@ -6,7 +6,7 @@ import { Button, Container, Typography } from '@mui/material';
 import StarRatings from 'react-star-ratings';
 import { useHistory } from 'react-router';
 
-const Booking = ({ booking }) => {
+const Booking = ({ booking, handleDeleteBooking }) => {
     const { _id, productName, productPrice, productImage, status } = booking;
     const history = useHistory();
 
@@ -23,7 +23,7 @@ const Booking = ({ booking }) => {
                 <Typography variant="h6" sx={{ my: 2 }}>$ {productPrice}</Typography>
 
 
-                <Button type="contained" style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "90%" }} sx={{ my: 2 }}>Delete</Button>
+                <Button onClick={() => { handleDeleteBooking(_id) }} type="contained" style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "90%" }} sx={{ my: 2 }}>Delete</Button>
             </Paper>
         </Grid>
     );
