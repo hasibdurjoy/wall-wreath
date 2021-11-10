@@ -118,14 +118,11 @@ const Book = () => {
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
 
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    {/* <Typography>Your Service Charge will be {service.price}</Typography> */}
-                    <Button
-                        type="submit"
-                        style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px" }} sx={{ my: 2, mx: 'auto' }}
-                    >Confirm Order</Button>
-                </Box>
 
+                <Button
+                    type="submit"
+                    style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px" }} sx={{ my: 2, mx: 'auto' }}
+                >Confirm Order</Button>
             </form>
             {
                 bookingSuccess && <Alert severity="success">Successfully Booked</Alert>
