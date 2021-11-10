@@ -14,7 +14,8 @@ const Product = ({ product }) => {
         setSeeMore(true);
     }
     const handleClick = (id) => {
-        history.push(`dashboard/${id}`)
+        console.log('clicked', id);
+        history.push(`products/${id}`)
     }
     return (
         <Grid item xs={12} md={4}>
@@ -35,7 +36,7 @@ const Product = ({ product }) => {
                     starSpacing="5px"
                     starRatedColor="orange"
                 />
-                <Button type="contained" style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "90%" }} sx={{ my: 2 }}>Buy Now</Button>
+                <Button onClick={() => { handleClick(product._id) }} type="contained" style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "90%" }} sx={{ my: 2 }}>Buy Now</Button>
             </Paper>
         </Grid>
     );
