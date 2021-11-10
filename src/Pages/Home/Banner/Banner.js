@@ -16,7 +16,7 @@ const images = [
     {
         label: 'San Francisco – Oakland Bay Bridge, United States',
         imgPath:
-            'https://lh3.googleusercontent.com/proxy/x_rEoPCi-LQOcyMPsr09IdoU_cm8oJgS5pPM57vsTrH_8ypkTgGGNqganr110H6khEOZr_lsy-sbw8JqYhjV2MsxX_qGDcmFg2IiLXSm7MMtgqOCQVZB8sAx',
+            'https://adorable-home.com/wp-content/gallery/posters-an-artistic-and-affordable-way-to-decorate/affordable-home-decoration-with-posters-1.jpg',
     },
     {
         label: 'Bird',
@@ -76,7 +76,6 @@ const Banner = () => {
                                     mx: "auto"
                                 }}
                                 src={step.imgPath}
-                                alt={step.label}
                             />
                         ) : null}
                     </div>
