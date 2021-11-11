@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 const AdminBookingList = () => {
     const [bookings, setBookings] = useState([]);
-    const [updateSuccess, setUpdateSuccess] = useState(true);
+    const [updateSuccess, setUpdateSuccess] = useState(false);
 
     useEffect(() => {
         fetch('https://salty-ravine-02871.herokuapp.com/allBookings')
@@ -40,6 +40,7 @@ const AdminBookingList = () => {
     }, [updateSuccess])
 
     const approveBooking = (id) => {
+        setUpdateSuccess(false);
         const proceed = window.confirm('Are you want to approve this booking??');
         if (proceed) {
             const url = `http://localhost:5000/bookings/${id}`;
@@ -53,6 +54,7 @@ const AdminBookingList = () => {
                 .then(data => {
                     if (data.modifiedCount > 0) {
                         alert('Approved Successful');
+                        setUpdateSuccess(true);
                     }
                 })
         }
@@ -97,7 +99,11 @@ const AdminBookingList = () => {
                                 </StyledTableCell>
                                 <StyledTableCell align="left">{booking.email}</StyledTableCell>
                                 <StyledTableCell align="left">{booking.productName}</StyledTableCell>
-                                <StyledTableCell align="left">{booking.status}</StyledTableCell>
+
+                                <StyledTableCell align="left"
+                                    style={booking.status === 'approved' ? { color: "green" } : { color: "red" }}>{booking.status}
+                                </StyledTableCell>
+
                                 <StyledTableCell align="left">
                                     <Button onClick={() => { approveBooking(booking._id) }}>Approve</Button>
                                     <Button onClick={() => { deleteBooking(booking._id) }}>Delete</Button>
