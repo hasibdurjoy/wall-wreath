@@ -5,8 +5,12 @@ import Grid from '@mui/material/Grid';
 import { Button, Container, Typography } from '@mui/material';
 import StarRatings from 'react-star-ratings';
 import { useHistory } from 'react-router';
+import ProductUpdateModal from '../ProductUpdateModal/ProductUpdateModal';
 
 const AdminShowSingleProduct = ({ product, handleDeleteProduct }) => {
+    const [openBooking, setBookingOpen] = React.useState(false);
+    const handleBookingOpen = () => setBookingOpen(true);
+    const handleBookingClose = () => setBookingOpen(false);
     const history = useHistory();
     const handleEditProduct = id => {
         history.push(`/dashboard/manageProducts/${id}`)
@@ -19,10 +23,10 @@ const AdminShowSingleProduct = ({ product, handleDeleteProduct }) => {
                 <Typography variant="h6" >{product.name}</Typography>
                 <Typography variant="h6" sx={{ my: 2 }}>$ {product.price}</Typography>
                 <Box sx={{ mx: 2, pb: 3 }} id="product-description">
-                    <Typography variant="subtitle1"  >Height : {product.description.height} inches</Typography>
-                    <Typography variant="subtitle1"  >Width : {product.description.width} inches</Typography>
-                    <Typography variant="subtitle1"  >Frame : {product.description.frame} </Typography>
-                    <Typography variant="subtitle1"  > {product.description.about} </Typography>
+                    <Typography variant="subtitle1"  >Height : {product.height} inches</Typography>
+                    <Typography variant="subtitle1"  >Width : {product.width} inches</Typography>
+                    <Typography variant="subtitle1"  >Frame : {product.frame} </Typography>
+                    <Typography variant="subtitle1"  > {product.about} </Typography>
                 </Box>
 
                 <StarRatings
@@ -32,10 +36,15 @@ const AdminShowSingleProduct = ({ product, handleDeleteProduct }) => {
                     starRatedColor="orange"
                 /> <br />
                 <Box style={{ display: 'flex', justifyContent: "space-around" }}>
-                    <Button onClick={() => { handleEditProduct(product._id) }} type="contained" style={{ color: "white", backgroundColor: "green", padding: "10px" }} sx={{ my: 2 }}>Edit</Button>
+                    <Button onClick={handleBookingOpen} type="contained" style={{ color: "white", backgroundColor: "green", padding: "10px" }} sx={{ my: 2 }}>Edit</Button>
                     <Button onClick={() => { handleDeleteProduct(product._id) }} type="contained" style={{ color: "white", backgroundColor: "red", padding: "10px" }} sx={{ my: 2 }}>Delete</Button>
                 </Box>
             </Paper>
+            <ProductUpdateModal
+                product={product}
+                openBooking={openBooking}
+                handleBookingClose={handleBookingClose}
+            ></ProductUpdateModal>
         </Grid>
     );
 };

@@ -9,7 +9,7 @@ const Footer = () => {
             <Container>
                 <Grid container spacing={4}>
                     <Grid item xs={12} md={4}>
-                        <img src="https://i.ibb.co/mzMrcNn/map-pin-2-fill.png" />
+                        <img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" />
                         <Typography variant="body1">H100 (3rd floor) , Road 100</Typography>
                         <Typography variant="body1">New DOHS, Mohakhali, Dhaka BAngladesh</Typography>
                     </Grid>

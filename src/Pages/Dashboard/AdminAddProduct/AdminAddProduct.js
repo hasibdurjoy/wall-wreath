@@ -13,24 +13,13 @@ const AdminAddProduct = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const onSubmit = data => {
-        const product = {
-            name: data.name,
-            price: data.price,
-            description: {
-                height: data.height,
-                width: data.width,
-                frame: data.frame,
-                about: data.description,
-            },
-            rating: data.rating,
-            img: data.image,
-        }
+        console.log(data);
         fetch('https://salty-ravine-02871.herokuapp.com/products', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(product)
+            body: JSON.stringify(data)
         })
             .then(res => res.json())
             .then(data => {
@@ -89,7 +78,7 @@ const AdminAddProduct = () => {
 
                         <select
                             required
-                            {...register("height", { required: true })}
+                            {...register("frame", { required: true })}
                             defaultChecked="withFrame"
                             style={{ width: "49%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
                             placeholder="name" >
@@ -111,7 +100,7 @@ const AdminAddProduct = () => {
                         <input
                             required
                             type="text"
-                            {...register("description", { required: true })}
+                            {...register("about", { required: true })}
                             style={{ width: "100%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
                             placeholder="description" />
                     </Box>

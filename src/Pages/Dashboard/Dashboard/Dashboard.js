@@ -24,7 +24,6 @@ import AdminMakeAdmin from '../AdminMakeAdmin/AdminMakeAdmin';
 import AdminAddProduct from '../AdminAddProduct/AdminAddProduct';
 import AdminManageProducts from '../AdminManageProducts/AdminManageProducts';
 import AdminRoute from '../../Login/AdminRoute/AdminRoute';
-import AdminUpdateProduct from '../AdminUpdateProduct/AdminUpdateProduct';
 
 const drawerWidth = 240;
 
@@ -181,7 +180,6 @@ function Dashboard(props) {
                     <AdminRoute path={`${path}/makeAdmin`}><AdminMakeAdmin /></AdminRoute>
                     <AdminRoute path={`${path}/addProduct`}><AdminAddProduct /></AdminRoute>
                     <AdminRoute exact path={`${path}/manageProducts`}><AdminManageProducts /></AdminRoute>
-                    <AdminRoute path={`${path}/manageProduct/:productId`}><AdminUpdateProduct /></AdminRoute>
                 </Switch>
             </Box>
         </Box>
@@ -189,10 +187,6 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window: PropTypes.func,
 };
 

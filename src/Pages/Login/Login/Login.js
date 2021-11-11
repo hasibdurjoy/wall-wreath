@@ -32,6 +32,7 @@ const Login = () => {
     return (
         <Box sx={{ my: 2 }}>
             <Container sx={{ width: "35%", pt: 3, pb: 3 }} style={{ border: "1px solid black" }}>
+                <img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" />
                 <Typography variant="h6" sx={{ textAlign: "left", fontWeight: 900 }}>Log In</Typography>
                 <form onSubmit={handleLogInSubmit}>
                     <TextField

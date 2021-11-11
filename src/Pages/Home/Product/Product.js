@@ -23,10 +23,10 @@ const Product = ({ product }) => {
                 <Typography variant="h6" >{product.name}</Typography>
                 <Typography variant="h6" sx={{ my: 2 }}>$ {product.price}</Typography>
                 <Box sx={{ mx: 2, pb: 3 }} id="product-description">
-                    <Typography variant="subtitle1"  >Height : {product.description.height} inches</Typography>
-                    <Typography variant="subtitle1"  >Width : {product.description.width} inches</Typography>
-                    <Typography variant="subtitle1"  >Frame : {product.description.frame} </Typography>
-                    <Typography variant="subtitle1"  > {product.description.about} </Typography>
+                    <Typography variant="subtitle1"  >Height : {product.height} inches</Typography>
+                    <Typography variant="subtitle1"  >Width : {product.width} inches</Typography>
+                    <Typography variant="subtitle1"  >Frame : {product.frame} </Typography>
+                    <Typography variant="subtitle1"  > {product.about} </Typography>
                 </Box>
 
                 <StarRatings

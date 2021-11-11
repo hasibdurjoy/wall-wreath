@@ -35,7 +35,8 @@ const Register = () => {
 
     return (
         <Box sx={{ my: 2 }}>
-            <Container sx={{ width: "35%", pt: 2, pb: 3 }} style={{ border: "1px solid black" }}>
+            <Container sx={{ width: "40%", pt: 2, pb: 3 }} style={{ border: "1px solid black" }}>
+                <img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" />
                 <Typography variant="h6" sx={{ textAlign: "left", fontWeight: 900 }}>Create An Account</Typography>
                 <form onSubmit={handleLogInSubmit}>
                     <TextField
