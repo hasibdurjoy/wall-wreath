@@ -22,7 +22,7 @@ const Product = ({ product }) => {
                 <img src={product.img} alt="" width="300px" height="300px" style={{ marginTop: "20px" }} />
                 <Typography variant="h6" >{product.name}</Typography>
                 <Typography variant="h6" sx={{ my: 2 }}>$ {product.price}</Typography>
-                <Box sx={{ mx: 2, pb: 3 }} style={{ display: "none" }} className="product-description">
+                <Box sx={{ mx: 2, pb: 3 }} style={{ display: "none" }} id="product-description">
                     <Typography variant="subtitle1"  >Height : {product.description.height} inches</Typography>
                     <Typography variant="subtitle1"  >Width : {product.description.width} inches</Typography>
                     <Typography variant="subtitle1"  >Frame : {product.description.frame} </Typography>

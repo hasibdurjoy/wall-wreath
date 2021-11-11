@@ -1,0 +1,4 @@
+.product:hover #product-description{
+    display: block;
+    background-color: red;
+}

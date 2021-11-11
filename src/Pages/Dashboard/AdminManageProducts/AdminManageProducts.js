@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminManageServices = () => {
+const AdminManageProducts = () => {
     return (
         <div>
             <h3>Manage Services</h3>
@@ -8,4 +8,4 @@ const AdminManageServices = () => {
     );
 };
 
-export default AdminManageServices;
+export default AdminManageProducts;

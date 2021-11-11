@@ -87,13 +87,12 @@ const AdminMakeAdmin = () => {
             }
 
             <TableContainer component={Paper} sx={{ mt: 5 }}>
-                <Typography>Our All Admins</Typography>
+                <Typography variant="h5" sx={{ fontWeight: 900 }}>Our All Admins</Typography>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>Name</StyledTableCell>
                             <StyledTableCell align="left">Email</StyledTableCell>
-                            <StyledTableCell align="left">Status</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

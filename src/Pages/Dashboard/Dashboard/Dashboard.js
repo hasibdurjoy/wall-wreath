@@ -11,7 +11,8 @@ import {
     Switch,
     Route,
     Link,
-    useRouteMatch
+    useRouteMatch,
+    NavLink
 } from "react-router-dom";
 import { AppBar, Button, IconButton, Typography } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
@@ -20,9 +21,11 @@ import BookingList from '../BookingList/BookingList';
 import Feedback from '../Feedback/Feedback';
 import AdminBookingList from '../AdminBookingList/AdminBookingList';
 import AdminMakeAdmin from '../AdminMakeAdmin/AdminMakeAdmin';
+import AdminAddProduct from '../AdminAddProduct/AdminAddProduct';
+import AdminManageProducts from '../AdminManageProducts/AdminManageProducts';
+import AdminRoute from '../../Login/AdminRoute/AdminRoute';
 
-
-const drawerWidth = 150;
+const drawerWidth = 240;
 
 function Dashboard(props) {
     const { user, logOut, admin } = useAuth();
@@ -34,27 +37,72 @@ function Dashboard(props) {
         setMobileOpen(!mobileOpen);
     };
 
+    const activeStyle = {
+        color: "red"
+    }
+
     const drawer = (
-        <div style={{ textAlign: "left", paddingLeft: "20px" }}>
+        <div>
             <Toolbar />
             <Divider />
-            <Link to="/home" style={{ marginRight: "20px", textDecoration: "none", }}>Home</Link> <br />
-            {
-                admin ? <><Link to={`${url}/manageBookings`} style={{ textDecoration: "none", }}>Bookings</Link><br />
-                    <Link to={`${url}/makeAdmin`} style={{ textDecoration: "none", }}>Make Admin</Link><br /></>
+            <Box sx={{ textAlign: "left", ml: 2 }}>
+                <NavLink to="/home" style={{ marginRight: "20px", textDecoration: "none", }}>Home</NavLink> <br />
+                {
+                    admin ? <>
+                        <NavLink
+                            activeStyle={activeStyle}
+                            to={`${url}/manageBookings`}
+                            style={{ textDecoration: "none", }}>
+                            Bookings</NavLink><br />
 
-                    :
-                    <><Link to={`${url}/pay`} style={{ textDecoration: "none", }}>Pay</Link><br />
-                        <Link to={`${url}/myOrders`} style={{ textDecoration: "none", }}>My Orders</Link><br />
-                        <Link to={`${url}/review`} style={{ textDecoration: "none", }}>Review</Link><br /></>
-            }
+                        <NavLink
+                            activeStyle={activeStyle}
+                            to={`${url}/makeAdmin`}
+                            style={{ textDecoration: "none", }}>
+                            Make Admin</NavLink ><br />
+
+                        <NavLink
+                            activeStyle={activeStyle}
+                            to={`${url}/addProduct`}
+                            style={{ textDecoration: "none", }}>
+                            Add New Product</NavLink ><br />
+
+                        <NavLink
+                            activeStyle={activeStyle}
+                            to={`${url}/manageProducts`}
+                            style={{ textDecoration: "none", }}>
+                            Manage Products</NavLink ><br />
+
+                    </>
+
+                        :
+                        <>
+                            <NavLink
+                                activeStyle={activeStyle}
+                                to={`${url}/pay`}
+                                style={{ textDecoration: "none", }}>
+                                Pay</NavLink ><br />
+
+                            <NavLink
+                                activeStyle={activeStyle}
+                                to={`${url}/myOrders`}
+                                style={{ textDecoration: "none", }}>
+                                My Orders</NavLink ><br />
+
+                            <NavLink
+                                activeStyle={activeStyle}
+                                to={`${url}/review`}
+                                style={{ textDecoration: "none", }}>
+                                Review</NavLink ><br />
+                        </>
+                }
+            </Box>
 
             <Button onClick={logOut} style={{ color: "black" }}>Logout</Button>
         </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
-
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -77,7 +125,7 @@ function Dashboard(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Dashboard
+                        Responsive drawer
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -121,15 +169,17 @@ function Dashboard(props) {
                 <Switch>
                     {
                         admin ?
-                            <Route exact path={path}><AdminBookingList /></Route>
+                            <AdminRoute exact path={path}><AdminBookingList /></AdminRoute>
                             :
                             <Route exact path={path}><Pay /></Route>
                     }
                     <Route path={`${path}/pay`}><Pay /></Route>
                     <Route path={`${path}/myOrders`}><BookingList /></Route>
                     <Route path={`${path}/review`}><Feedback /></Route>
-                    <Route path={`${path}/manageBookings`}><AdminBookingList /></Route>
-                    <Route path={`${path}/makeAdmin`}><AdminMakeAdmin /></Route>
+                    <AdminRoute path={`${path}/manageBookings`}><AdminBookingList /></AdminRoute>
+                    <AdminRoute path={`${path}/makeAdmin`}><AdminMakeAdmin /></AdminRoute>
+                    <AdminRoute path={`${path}/addProduct`}><AdminAddProduct /></AdminRoute>
+                    <AdminRoute path={`${path}/manageProducts`}><AdminManageProducts /></AdminRoute>
                 </Switch>
             </Box>
         </Box>
@@ -137,6 +187,10 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
+    /**
+     * Injected by the documentation to work in an iframe.
+     * You won't need it on your project.
+     */
     window: PropTypes.func,
 };
 

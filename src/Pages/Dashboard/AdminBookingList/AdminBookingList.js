@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
+import { Button } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,11 +31,50 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 const AdminBookingList = () => {
     const [bookings, setBookings] = useState([]);
+    const [updateSuccess, setUpdateSuccess] = useState(true);
+
     useEffect(() => {
-        fetch('https://salty-ravine-02871.herokuapp.com/bookings')
+        fetch('https://salty-ravine-02871.herokuapp.com/allBookings')
             .then(res => res.json())
             .then(data => setBookings(data))
-    }, [])
+    }, [updateSuccess])
+
+    const approveBooking = (id) => {
+        const proceed = window.confirm('Are you want to approve this booking??');
+        if (proceed) {
+            const url = `http://localhost:5000/bookings/${id}`;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        alert('Approved Successful');
+                    }
+                })
+        }
+    }
+
+    const deleteBooking = (id) => {
+        const proceed = window.confirm('Are you sure, you want to cancel?');
+        if (proceed) {
+            const url = `https://salty-ravine-02871.herokuapp.com/bookings/${id}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        alert('deleted successfully');
+                        const remainingBookings = bookings.filter(booking => booking._id !== id);
+                        setBookings(remainingBookings);
+                    }
+                });
+        }
+    }
     return (
         <Box>
             <TableContainer component={Paper}>
@@ -44,8 +84,8 @@ const AdminBookingList = () => {
                             <StyledTableCell>Name</StyledTableCell>
                             <StyledTableCell align="left">Email</StyledTableCell>
                             <StyledTableCell align="left">Product</StyledTableCell>
-                            <StyledTableCell align="left">Pay With</StyledTableCell>
                             <StyledTableCell align="left">Status</StyledTableCell>
+                            <StyledTableCell align="left">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -57,8 +97,11 @@ const AdminBookingList = () => {
                                 </StyledTableCell>
                                 <StyledTableCell align="left">{booking.email}</StyledTableCell>
                                 <StyledTableCell align="left">{booking.productName}</StyledTableCell>
-                                <StyledTableCell align="left">{booking.payment}</StyledTableCell>
                                 <StyledTableCell align="left">{booking.status}</StyledTableCell>
+                                <StyledTableCell align="left">
+                                    <Button onClick={() => { approveBooking(booking._id) }}>Approve</Button>
+                                    <Button onClick={() => { deleteBooking(booking._id) }}>Delete</Button>
+                                </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
