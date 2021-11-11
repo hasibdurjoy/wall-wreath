@@ -18,15 +18,16 @@ import useAuth from '../../../hooks/useAuth';
 import Pay from '../Pay/Pay';
 import BookingList from '../BookingList/BookingList';
 import Feedback from '../Feedback/Feedback';
+import AdminBookingList from '../AdminBookingList/AdminBookingList';
+import AdminMakeAdmin from '../AdminMakeAdmin/AdminMakeAdmin';
 
 
 const drawerWidth = 150;
 
 function Dashboard(props) {
-    const { user, logOut } = useAuth();
+    const { user, logOut, admin } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
     let { path, url } = useRouteMatch();
 
     const handleDrawerToggle = () => {
@@ -38,9 +39,16 @@ function Dashboard(props) {
             <Toolbar />
             <Divider />
             <Link to="/home" style={{ marginRight: "20px", textDecoration: "none", }}>Home</Link> <br />
-            <Link to={`${url}/pay`} style={{ textDecoration: "none", }}>Pay</Link><br />
-            <Link to={`${url}/myOrders`} style={{ textDecoration: "none", }}>My Orders</Link><br />
-            <Link to={`${url}/review`} style={{ textDecoration: "none", }}>Review</Link><br />
+            {
+                admin ? <><Link to={`${url}/manageBookings`} style={{ textDecoration: "none", }}>Bookings</Link><br />
+                    <Link to={`${url}/makeAdmin`} style={{ textDecoration: "none", }}>Make Admin</Link><br /></>
+
+                    :
+                    <><Link to={`${url}/pay`} style={{ textDecoration: "none", }}>Pay</Link><br />
+                        <Link to={`${url}/myOrders`} style={{ textDecoration: "none", }}>My Orders</Link><br />
+                        <Link to={`${url}/review`} style={{ textDecoration: "none", }}>Review</Link><br /></>
+            }
+
             <Button onClick={logOut} style={{ color: "black" }}>Logout</Button>
         </div>
     );
@@ -111,10 +119,17 @@ function Dashboard(props) {
             >
                 <Toolbar />
                 <Switch>
-                    <Route exact path={path}><Pay /></Route>
+                    {
+                        admin ?
+                            <Route exact path={path}><AdminBookingList /></Route>
+                            :
+                            <Route exact path={path}><Pay /></Route>
+                    }
                     <Route path={`${path}/pay`}><Pay /></Route>
                     <Route path={`${path}/myOrders`}><BookingList /></Route>
                     <Route path={`${path}/review`}><Feedback /></Route>
+                    <Route path={`${path}/manageBookings`}><AdminBookingList /></Route>
+                    <Route path={`${path}/makeAdmin`}><AdminMakeAdmin /></Route>
                 </Switch>
             </Box>
         </Box>
