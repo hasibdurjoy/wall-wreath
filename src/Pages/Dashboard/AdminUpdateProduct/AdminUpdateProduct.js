@@ -8,9 +8,17 @@ import Alert from '@mui/material/Alert';
 import useAuth from '../../../hooks/useAuth';
 import { useForm } from "react-hook-form";
 
-const AdminAddProduct = () => {
+const AdminUpdateProduct = () => {
+    const { productId } = useParams();
     const [addSuccess, setAddSuccess] = useState(false);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [product, setProduct] = useState({});
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
+
+    useEffect(() => {
+        fetch(`https://salty-ravine-02871.herokuapp.com/manageProducts/${productId}`)
+            .then(res => res.json())
+            .then(data => setProduct(data))
+    }, [])
 
     const onSubmit = data => {
         const product = {
@@ -48,6 +56,7 @@ const AdminAddProduct = () => {
 
                     <Box sx={{ mb: 3 }}>
                         <input
+                            defaultValue={product.name}
                             required
                             type="text"
                             {...register("name", { required: true })}
@@ -128,4 +137,4 @@ const AdminAddProduct = () => {
     );
 };
 
-export default AdminAddProduct;
+export default AdminUpdateProduct;

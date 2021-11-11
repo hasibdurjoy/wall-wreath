@@ -9,7 +9,7 @@ const Products = () => {
         fetch('https://salty-ravine-02871.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data))
-    }, [])
+    }, []);
     return (
         <Container sx={{ mt: 0 }}>
             <Typography variant="h4" style={{ marginTop: 0 }} sx={{ fontWeight: 900, pb: 3 }}>Our Awesome <span style={{ color: "#F63E7B" }}>Products</span></Typography>

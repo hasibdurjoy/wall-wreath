@@ -5,17 +5,13 @@ import Grid from '@mui/material/Grid';
 import { Button, Container, Typography } from '@mui/material';
 import StarRatings from 'react-star-ratings';
 import { useHistory } from 'react-router';
-import './Product.css';
-const Product = ({ product }) => {
-    const history = useHistory();
-    const [seeMore, setSeeMore] = useState(false)
 
-    const seeMoreButton = () => {
-        setSeeMore(true);
+const AdminShowSingleProduct = ({ product, handleDeleteProduct }) => {
+    const history = useHistory();
+    const handleEditProduct = id => {
+        history.push(`/dashboard/manageProducts/${id}`)
     }
-    const handleClick = (id) => {
-        history.push(`/products/${id}`)
-    }
+
     return (
         <Grid item xs={12} md={4}>
             <Paper elevation={3} className="product">
@@ -34,11 +30,14 @@ const Product = ({ product }) => {
                     starDimension="20px"
                     starSpacing="5px"
                     starRatedColor="orange"
-                />
-                <Button onClick={() => { handleClick(product._id) }} type="contained" style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "90%" }} sx={{ my: 2 }}>Buy Now</Button>
+                /> <br />
+                <Box style={{ display: 'flex', justifyContent: "space-around" }}>
+                    <Button onClick={() => { handleEditProduct(product._id) }} type="contained" style={{ color: "white", backgroundColor: "green", padding: "10px" }} sx={{ my: 2 }}>Edit</Button>
+                    <Button onClick={() => { handleDeleteProduct(product._id) }} type="contained" style={{ color: "white", backgroundColor: "red", padding: "10px" }} sx={{ my: 2 }}>Delete</Button>
+                </Box>
             </Paper>
         </Grid>
     );
 };
 
-export default Product;
+export default AdminShowSingleProduct;

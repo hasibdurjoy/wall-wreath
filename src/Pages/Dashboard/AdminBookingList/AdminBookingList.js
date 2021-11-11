@@ -43,7 +43,7 @@ const AdminBookingList = () => {
         setUpdateSuccess(false);
         const proceed = window.confirm('Are you want to approve this booking??');
         if (proceed) {
-            const url = `http://localhost:5000/bookings/${id}`;
+            const url = `https://salty-ravine-02871.herokuapp.com/bookings/${id}`;
             fetch(url, {
                 method: 'PUT',
                 headers: {
