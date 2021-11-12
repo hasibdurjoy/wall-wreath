@@ -20,12 +20,11 @@ const style = {
     p: 4,
 };
 
-export default function ProductUpdateModal({ product, openBooking, handleBookingClose }) {
+export default function ProductUpdateModal({ product, openBooking, handleBookingClose, handleSuccessModalOpen, setUpdateSuccess }) {
 
     const { _id, name, price, height, width, frame, about, rating, img } = product;
     const initialInfo = { name, price, height, width, frame, about, rating, img }
     const [bookingInfo, setBookingInfo] = useState(initialInfo);
-    const [updateSuccess, setUpdateSuccess] = useState(false);
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -51,8 +50,9 @@ export default function ProductUpdateModal({ product, openBooking, handleBooking
                 .then(res => res.json())
                 .then(data => {
                     if (data.modifiedCount > 0) {
-                        alert('Approved Successful');
+                        setUpdateSuccess(true);
                         handleBookingClose();
+                        handleSuccessModalOpen();
                     }
                 })
         }

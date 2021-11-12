@@ -7,7 +7,7 @@ import StarRatings from 'react-star-ratings';
 import { useHistory } from 'react-router';
 import ProductUpdateModal from '../ProductUpdateModal/ProductUpdateModal';
 
-const AdminShowSingleProduct = ({ product, handleDeleteProduct }) => {
+const AdminShowSingleProduct = ({ product, handleDeleteProduct, handleSuccessModalOpen, setUpdateSuccess }) => {
     const [openBooking, setBookingOpen] = React.useState(false);
     const handleBookingOpen = () => setBookingOpen(true);
     const handleBookingClose = () => setBookingOpen(false);
@@ -42,6 +42,8 @@ const AdminShowSingleProduct = ({ product, handleDeleteProduct }) => {
                 product={product}
                 openBooking={openBooking}
                 handleBookingClose={handleBookingClose}
+                handleSuccessModalOpen={handleSuccessModalOpen}
+                setUpdateSuccess={setUpdateSuccess}
             ></ProductUpdateModal>
         </Grid>
     );
