@@ -3,10 +3,20 @@ import useAuth from '../../../hooks/useAuth';
 import Grid from '@mui/material/Grid';
 import { Container, Typography } from '@mui/material';
 import Booking from '../Booking/Booking';
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 const BookingList = () => {
     const { user } = useAuth();
     const [bookings, setBookings] = useState([]);
+
+
+    const [modalText, setModalText] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const handleSuccessModalOpen = (text) => {
+        setModalText(text);
+        setOpen(true);
+    };
+
     useEffect(() => {
         fetch(`https://salty-ravine-02871.herokuapp.com/bookings/?email=${user.email}`)
             .then(res => res.json())
@@ -23,7 +33,7 @@ const BookingList = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        alert('deleted successfully');
+                        handleSuccessModalOpen('Deleted successfully');
                         const remainingBookings = bookings.filter(booking => booking._id !== id);
                         setBookings(remainingBookings);
                     }
@@ -38,6 +48,13 @@ const BookingList = () => {
                     bookings.map(booking => <Booking booking={booking} handleDeleteBooking={handleDeleteBooking} />)
                 }
             </Grid>
+
+            <ModalMessage
+                open={open}
+                setOpen={setOpen}
+                modalText={modalText}
+            >
+            </ModalMessage>
         </ Container>
     );
 };

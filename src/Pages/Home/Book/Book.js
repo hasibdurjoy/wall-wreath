@@ -4,22 +4,27 @@ import { Button, Container, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import Alert from '@mui/material/Alert';
 import useAuth from '../../../hooks/useAuth';
+import { useForm } from "react-hook-form";
+import ModalMessage from '../../Dashboard/ModalMessage/ModalMessage';
 
 const Book = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState({});
     const { user } = useAuth();
     const [bookingSuccess, setBookingSuccess] = useState(false);
-    const [bookingData, setBookingData] = useState({});
     const history = useHistory();
 
-    const handleOnChange = e => {
-        const field = e.target.name;
-        const value = e.target.value;
-        const newBookingData = { ...bookingData };
-        newBookingData[field] = value;
-        setBookingData(newBookingData);
-    }
+
+    const [modalText, setModalText] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const handleSuccessModalOpen = (text) => {
+        setModalText(text);
+        setOpen(true);
+    };
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+
 
     useEffect(() => {
         fetch(`https://salty-ravine-02871.herokuapp.com/products/${productId}`)
@@ -27,12 +32,12 @@ const Book = () => {
             .then(data => setProduct(data))
     }, []);
 
-    const handleBooking = e => {
-        console.log(bookingData);
+    const onSubmit = data => {
         const booking = {
-            displayName: user.displayName,
-            email: user.email,
-            ...bookingData,
+            displayName: data.name,
+            email: data.email,
+            address: data.address,
+            phone: data.phone,
             productName: product.name,
             productId: product._id,
             productPrice: product.price,
@@ -40,31 +45,32 @@ const Book = () => {
             status: "pending",
         }
 
-        console.log(booking);
-        fetch('https://salty-ravine-02871.herokuapp.com/bookings', {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(booking)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    setBookingSuccess(true);
-                }
-            });
+        const proceed = window.confirm("Confirm Booking ?");
+        if (proceed) {
+            fetch('https://salty-ravine-02871.herokuapp.com/bookings', {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(booking)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        handleSuccessModalOpen("Booked Successfully");
+                        setBookingSuccess(true);
+                        reset();
+                    }
+                });
+        }
 
-        e.preventDefault();
     }
 
-    if (bookingSuccess) {
-        history.push("/");
-    }
     return (
         <Container sx={{ width: "50%", pb: 3, mx: 'auto' }} >
-            <form onSubmit={handleBooking}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
+                    {...register("name")}
                     label="name"
                     id="outlined-basic"
                     type="texts"
@@ -73,35 +79,34 @@ const Book = () => {
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
                 <TextField
+                    {...register("email")}
                     label="E-mail"
                     id="outlined-basic"
                     type="texts"
-                    name="email"
                     variant="outlined"
                     value={user.email}
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
                 <TextField
-                    onBlur={handleOnChange}
+                    {...register("address")}
                     required
                     label="Address"
                     id="outlined-basic"
                     type="texts"
-                    name="address"
                     variant="outlined"
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
                 <TextField
-                    onBlur={handleOnChange}
+                    {...register("phone")}
                     required
                     label="Phone"
                     id="outlined-basic"
                     type="number"
-                    name="phone"
                     variant="outlined"
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
                 <TextField
+                    {...register("productName")}
                     value={product.name}
                     id="outlined-basic"
                     type="texts"
@@ -113,7 +118,7 @@ const Book = () => {
                     value={`$ ${product.price}`}
                     id="outlined-basic"
                     type="texts"
-                    name="name"
+                    {...register("price")}
                     variant="outlined"
                     sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
@@ -124,10 +129,12 @@ const Book = () => {
                     style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px" }} sx={{ my: 2, mx: 'auto' }}
                 >Confirm Order</Button>
             </form>
-            {
-                bookingSuccess && <Alert severity="success">Successfully Booked</Alert>
-
-            }
+            <ModalMessage
+                open={open}
+                setOpen={setOpen}
+                modalText={modalText}
+            >
+            </ModalMessage>
         </Container>
     );
 };

@@ -6,107 +6,62 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Alert from '@mui/material/Alert';
 import { useForm } from "react-hook-form";
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 const Pay = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const [modalText, setModalText] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const handleSuccessModalOpen = (text) => {
+        setModalText(text);
+        setOpen(true);
+    };
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
+    const onSubmit = data => {
+        handleSuccessModalOpen("Payment Method Coming soon Thank You")
+        reset();
+    };
     return (
         <div>
             <Container sx={{ width: "60%", pb: 3 }} >
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField
                         {...register("name")}
-                        label="Product Name"
-                        type="texts"
+                        label="Payment Method"
+                        type="text"
                         variant="outlined"
                         sx={{ width: "100%", backgroundColor: "white", mb: 1 }}
                     />
 
                     <TextField
-
+                        {...register("name")}
                         required
-                        label="Price"
+                        label="Amount"
                         id="outlined-basic"
                         type="number"
-                        name="price"
-                        variant="outlined"
-                        sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
-
-                    <Box style={{ display: "flex", justifyContent: "space-between" }}>
-                        <TextField
-
-                            required
-                            label="height(inches)"
-                            id="outlined-basic"
-                            type="number"
-                            name="height"
-                            variant="outlined"
-                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
-
-                        <TextField
-
-                            required
-                            label="width(inches)"
-                            id="outlined-basic"
-                            type="number"
-                            name="width"
-                            variant="outlined"
-                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
-                    </Box>
-
-                    <Box style={{ display: "flex", justifyContent: "space-between" }}>
-                        <TextField
-
-                            required
-                            label="rating"
-                            id="outlined-basic"
-                            type="number"
-                            name="rating"
-                            variant="outlined"
-                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
-
-                        <TextField
-
-                            required
-                            label="frame"
-                            id="outlined-basic"
-                            type="text"
-                            name="frame"
-                            variant="outlined"
-                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
-                    </Box>
-
-                    <TextField
-
-                        required
-                        label="Image url"
-                        id="outlined-basic"
-                        type="texts"
-                        name="img"
                         variant="outlined"
                         sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
                     <TextField
-
+                        {...register("txn_id")}
                         required
-                        label="description"
+                        label="Transaction "
                         id="outlined-basic"
-                        type="texts"
-                        name="about"
+                        type="text"
                         variant="outlined"
                         sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
-
 
                     <Button
                         type="submit"
                         style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "100%" }} sx={{ my: 2 }}
-                    >Add</Button>
+                    >Confirm Payment</Button>
 
                 </form>
-                {/*  {
-                    addSuccess && <Alert severity="success">Successfully added service</Alert>
-
-                } */}
+                <ModalMessage
+                    open={open}
+                    setOpen={setOpen}
+                    modalText={modalText}
+                >
+                </ModalMessage>
             </Container>
         </div>
     );

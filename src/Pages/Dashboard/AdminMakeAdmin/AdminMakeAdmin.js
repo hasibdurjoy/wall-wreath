@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,6 +39,14 @@ const AdminMakeAdmin = () => {
     const [success, setSuccess] = useState(false);
     const { authToken } = useAuth();
 
+
+    const [modalText, setModalText] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const handleSuccessModalOpen = (text) => {
+        setModalText(text);
+        setOpen(true);
+    };
+
     const handleOnBlur = e => {
         setEmail(e.target.value);
     }
@@ -55,6 +64,7 @@ const AdminMakeAdmin = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount) {
+                    handleSuccessModalOpen(`Successfully Added Admin : ${user.email}`)
                     setSuccess(true);
                 }
             })
@@ -80,11 +90,6 @@ const AdminMakeAdmin = () => {
                     onBlur={handleOnBlur} />
                 <Button variant="contained" type="submit">Make Admin</Button>
             </form>
-            {
-                success && <><Alert severity="success">
-                    <AlertTitle>Successfully created admin</AlertTitle>
-                </Alert></>
-            }
 
             <TableContainer component={Paper} sx={{ mt: 5 }}>
                 <Typography variant="h5" sx={{ fontWeight: 900 }}>Our All Admins</Typography>
@@ -108,6 +113,13 @@ const AdminMakeAdmin = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <ModalMessage
+                open={open}
+                setOpen={setOpen}
+                modalText={modalText}
+            >
+            </ModalMessage>
         </div>
     );
 };
