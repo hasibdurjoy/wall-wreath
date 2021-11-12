@@ -40,7 +40,7 @@ export default function ProductUpdateModal({ product, openBooking, handleBooking
         console.log(bookingInfo);
         const proceed = window.confirm('Are you want to approve this booking??');
         if (proceed) {
-            const url = `http://localhost:5000/products/${_id}`;
+            const url = `https://salty-ravine-02871.herokuapp.com/products/${_id}`;
             fetch(url, {
                 method: 'PUT',
                 headers: {
