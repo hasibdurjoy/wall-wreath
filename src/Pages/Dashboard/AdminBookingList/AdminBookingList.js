@@ -13,8 +13,8 @@ import ModalMessage from '../ModalMessage/ModalMessage';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
+        backgroundColor: theme.palette.common.offWhite,
+        color: theme.palette.common.black,
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -87,33 +87,33 @@ const AdminBookingList = () => {
     return (
         <Box>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>Name</StyledTableCell>
-                            <StyledTableCell align="left">Email</StyledTableCell>
-                            <StyledTableCell align="left">Product</StyledTableCell>
-                            <StyledTableCell align="left">Status</StyledTableCell>
-                            <StyledTableCell align="left">Action</StyledTableCell>
+                <Table aria-label="customized table">
+                    <TableHead >
+                        <TableRow >
+                            <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 18 }}>Name</StyledTableCell>
+                            <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 16 }}>Email</StyledTableCell>
+                            <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 18 }}>Product</StyledTableCell>
+                            <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 18 }}>Status</StyledTableCell>
+                            <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 18 }}>Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
 
                         {bookings.map((booking) => (
                             <StyledTableRow key={booking._id}>
-                                <StyledTableCell component="th" scope="row">
+                                <StyledTableCell component="th" scope="row" align="center">
                                     {booking.displayName}
                                 </StyledTableCell>
-                                <StyledTableCell align="left">{booking.email}</StyledTableCell>
-                                <StyledTableCell align="left">{booking.productName}</StyledTableCell>
+                                <StyledTableCell align="center">{booking.email}</StyledTableCell>
+                                <StyledTableCell align="center">{booking.productName}</StyledTableCell>
 
-                                <StyledTableCell align="left"
+                                <StyledTableCell align="center"
                                     style={booking.status === 'approved' ? { color: "green" } : { color: "red" }}>{booking.status}
                                 </StyledTableCell>
 
-                                <StyledTableCell align="left">
-                                    <Button onClick={() => { approveBooking(booking._id) }}>Approve</Button>
-                                    <Button onClick={() => { deleteBooking(booking._id) }}>Delete</Button>
+                                <StyledTableCell align="center" sx={{ display: "flex", justifyContent: "space-around" }}>
+                                    <Button variant="contained" onClick={() => { approveBooking(booking._id) }}>Approve</Button>
+                                    <Button variant="contained" style={{ width: "30%", color: "white", backgroundColor: "#F63E7B" }} onClick={() => { deleteBooking(booking._id) }}>Delete</Button>
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}

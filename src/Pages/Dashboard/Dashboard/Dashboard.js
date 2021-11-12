@@ -31,6 +31,7 @@ function Dashboard(props) {
     const { user, logOut, admin } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [bannerText, setBannerText] = React.useState("Dashboard");
     let { path, url } = useRouteMatch();
 
     const handleDrawerToggle = () => {
@@ -41,33 +42,41 @@ function Dashboard(props) {
         color: "red"
     }
 
+    const handleBannerText = e => {
+        setBannerText(e.target.innerText);
+    }
+
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
-            <Box sx={{ textAlign: "left", ml: 2 }}>
+            <Box sx={{ textAlign: "left", ml: 2, fontWeight: 900, fontSize: 18 }}>
                 <NavLink to="/home" style={{ marginRight: "20px", textDecoration: "none", }}>Home</NavLink> <br />
                 {
                     admin ? <>
                         <NavLink
+                            onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/manageBookings`}
                             style={{ textDecoration: "none", }}>
                             Bookings</NavLink><br />
 
                         <NavLink
+                            onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/makeAdmin`}
                             style={{ textDecoration: "none", }}>
                             Make Admin</NavLink ><br />
 
                         <NavLink
+                            onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/addProduct`}
                             style={{ textDecoration: "none", }}>
                             Add New Product</NavLink ><br />
 
                         <NavLink
+                            onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/manageProducts`}
                             style={{ textDecoration: "none", }}>
@@ -78,18 +87,21 @@ function Dashboard(props) {
                         :
                         <>
                             <NavLink
+                                onClick={handleBannerText}
                                 activeStyle={activeStyle}
                                 to={`${url}/pay`}
                                 style={{ textDecoration: "none", }}>
                                 Pay</NavLink ><br />
 
                             <NavLink
+                                onClick={handleBannerText}
                                 activeStyle={activeStyle}
                                 to={`${url}/myOrders`}
                                 style={{ textDecoration: "none", }}>
                                 My Orders</NavLink ><br />
 
                             <NavLink
+                                onClick={handleBannerText}
                                 activeStyle={activeStyle}
                                 to={`${url}/review`}
                                 style={{ textDecoration: "none", }}>
@@ -98,7 +110,9 @@ function Dashboard(props) {
                 }
             </Box>
 
-            <Button onClick={logOut} style={{ color: "black" }}>Logout</Button>
+            <Box sx={{ mt: 5, mx: "auto" }}>
+                <Button variant="contained" onClick={logOut} style={{ width: "70%" }}>Logout</Button>
+            </Box>
         </div>
     );
 
@@ -125,7 +139,7 @@ function Dashboard(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Responsive drawer
+                        {bannerText}
                     </Typography>
                 </Toolbar>
             </AppBar>

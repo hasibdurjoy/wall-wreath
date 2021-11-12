@@ -10,12 +10,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ModalMessage from '../ModalMessage/ModalMessage';
-
+import { useForm } from "react-hook-form";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
+        backgroundColor: theme.palette.common.white,
+        color: theme.palette.common.black,
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -34,7 +34,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 const AdminMakeAdmin = () => {
-    const [email, setEmail] = useState('');
     const [admins, setAdmins] = useState([]);
     const [success, setSuccess] = useState(false);
     const { authToken } = useAuth();
@@ -46,30 +45,30 @@ const AdminMakeAdmin = () => {
         setModalText(text);
         setOpen(true);
     };
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-    const handleOnBlur = e => {
-        setEmail(e.target.value);
-    }
-    const handleAdminSubmit = e => {
-        const user = { email };
+    const onSubmit = data => {
+        const user = { ...data };
         console.log(user, authToken)
-        fetch('https://salty-ravine-02871.herokuapp.com/users/admin', {
-            method: 'PUT',
-            headers: {
-                // 'authorization': `Bearer ${authToken}`,
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount) {
-                    handleSuccessModalOpen(`Successfully Added Admin : ${user.email}`)
-                    setSuccess(true);
-                }
+        const proceed = window.confirm('Are you want to make new admin?')
+        if (proceed) {
+            fetch('https://salty-ravine-02871.herokuapp.com/users/admin', {
+                method: 'PUT',
+                headers: {
+                    // 'authorization': `Bearer ${authToken}`,
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
             })
-
-        e.preventDefault()
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount) {
+                        handleSuccessModalOpen(`Successfully Added Admin : ${user.email}`)
+                        setSuccess(true);
+                        reset();
+                    }
+                })
+        }
     }
 
     useEffect(() => {
@@ -77,37 +76,38 @@ const AdminMakeAdmin = () => {
             .then(res => res.json())
             .then(data => setAdmins(data))
     }, [success])
+
     return (
         <div>
-            <form onSubmit={handleAdminSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
+                    {...register("email")}
                     required
                     sx={{ width: '50%' }}
                     type="email"
                     id="standard-basic"
                     label="Email"
-                    variant="standard"
-                    onBlur={handleOnBlur} />
-                <Button variant="contained" type="submit">Make Admin</Button>
+                    variant="standard" />
+                <Button variant="contained" type="submit" style={{ backgroundColor: "#F63E7B" }} sx={{ mx: 3, py: 1 }}>Make Admin</Button>
             </form>
 
             <TableContainer component={Paper} sx={{ mt: 5 }}>
                 <Typography variant="h5" sx={{ fontWeight: 900 }}>Our All Admins</Typography>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <Table aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>Name</StyledTableCell>
-                            <StyledTableCell align="left">Email</StyledTableCell>
+                            <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 20 }}>Name</StyledTableCell>
+                            <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 20 }}>Email</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
 
                         {admins.map((row) => (
                             <StyledTableRow key={row._id}>
-                                <StyledTableCell component="th" scope="row">
+                                <StyledTableCell component="th" scope="row" align="center" sx={{ fontWeight: 900, fontSize: 18 }}>
                                     {row.displayName}
                                 </StyledTableCell>
-                                <StyledTableCell align="left">{row.email}</StyledTableCell>
+                                <StyledTableCell align="center" sx={{ fontWeight: 900, fontSize: 18 }}>{row.email}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

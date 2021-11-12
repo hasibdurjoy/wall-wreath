@@ -154,7 +154,9 @@ export default function ProductUpdateModal({ product, openBooking, handleBooking
                                 defaultValue={about}
                                 size="small"
                             />
-                            <Button type="submit" variant="contained">Update</Button>
+                            <Box sx={{ textAlign: "center", mt: 2 }}>
+                                <Button type="submit" variant="contained" style={{ width: "70%", color: "white", backgroundColor: "#F63E7B" }}>Update</Button>
+                            </Box>
                         </form>
                     </Box>
                 </Fade>
