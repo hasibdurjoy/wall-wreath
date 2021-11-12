@@ -11,7 +11,7 @@ const Reviews = () => {
     }, [])
     return (
         <Container sx={{ mt: 5 }}>
-            <Typography variant="h4" sx={{ mb: 5 }}>Our Happy Customers says</Typography>
+            <Typography variant="h4" sx={{ mb: 5, fontWeight: 800 }}>Our Happy <span style={{ color: "#F63E7B" }}>Customers </span>says</Typography>
             <Grid container spacing={5}>
                 {
                     reviews.map(review => <Review review={review}></Review>)

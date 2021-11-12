@@ -5,7 +5,7 @@ import { Container, Typography } from '@mui/material';
 
 const Footer = () => {
     return (
-        <Box sx={{ backgroundColor: "black", mt: 5, py: 5, color: "white", pb: 10 }}>
+        <Box sx={{ backgroundColor: "black", mt: 5, pt: 3, pb: 1, color: "white" }}>
             <Container>
                 <Grid container spacing={4}>
                     <Grid item xs={12} md={4}>
@@ -31,16 +31,16 @@ const Footer = () => {
                     </Grid>
                     <Grid item xs={12} md={4} sx={{ textAlign: "left" }}>
                         <Typography variant="h6">About Us</Typography>
-                        <Typography variant="body1" sx={{ py: 1 }}> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, iste inventore. Tenetur consequatur exercitationem autem, perspiciatis consectetur repellat consequuntur provident quod modi ut nulla animi earum suscipit, </Typography>
+                        <Typography variant="body1" sx={{ py: 1 }}>This is the best trusted shop in the town for posters</Typography>
                         <Box sx={{ py: 1 }} >
-                            <img src="https://i.ibb.co/dGV62qX/Vector.png" style={{ paddingRight: "10px" }} width="40px" />
-                            <img src="https://i.ibb.co/dcyNGTk/Vector-1.png" style={{ paddingRight: "10px" }} width="40px" />
-                            <img src="https://i.ibb.co/drnp7F0/Vector-2.png" style={{ paddingRight: "10px" }} width="40px" />
-                            <img src="https://i.ibb.co/NZy4QFm/Vector-3.png" style={{ paddingRight: "10px" }} width="40px" />
+                            <img src="https://i.ibb.co/dGV62qX/Vector.png" style={{ paddingRight: "10px" }} width="30px" />
+                            <img src="https://i.ibb.co/dcyNGTk/Vector-1.png" style={{ paddingRight: "10px" }} width="30px" />
+                            <img src="https://i.ibb.co/drnp7F0/Vector-2.png" style={{ paddingRight: "10px" }} width="30px" />
+                            <img src="https://i.ibb.co/NZy4QFm/Vector-3.png" style={{ paddingRight: "10px" }} width="30px" />
                         </Box>
                     </Grid>
                 </Grid>
-                <Typography variant="subtitle1">copyright @1990-2021 All right reserved by well-wreath.com</Typography>
+                <Typography variant="subtitle1" sx={{ color: "gray" }}>copyright @1990-2021 All right reserved by well-wreath.com</Typography>
             </Container>
         </Box>
     );

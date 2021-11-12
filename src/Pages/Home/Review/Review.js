@@ -7,7 +7,7 @@ const Review = ({ review }) => {
     return (
         <Grid item xs={12} md={6} sx={{ mb: 0 }}>
             <Paper elevation={1} >
-                <Grid container spacing={0} sx={{ py: 3, px: 3 }}>
+                <Grid container spacing={0} >
                     <Grid item xs={4}>
                         <Box style={{ border: "5px solid black" }} width="150px" height="150px">
                             <img src={review.img} alt="" style={{ marginLeft: "10px", marginTop: "-15px" }} width="150px" height="150px" />
