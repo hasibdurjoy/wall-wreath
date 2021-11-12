@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,6 +33,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const AdminBookingList = () => {
     const [bookings, setBookings] = useState([]);
     const [updateSuccess, setUpdateSuccess] = useState(false);
+    const [modalText, setModalText] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const handleSuccessModalOpen = (text) => {
+        setModalText(text);
+        setOpen(true);
+    };
 
     useEffect(() => {
         fetch('https://salty-ravine-02871.herokuapp.com/allBookings')
@@ -53,7 +60,7 @@ const AdminBookingList = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.modifiedCount > 0) {
-                        alert('Approved Successful');
+                        handleSuccessModalOpen("Approved Successfully");
                         setUpdateSuccess(true);
                     }
                 })
@@ -70,7 +77,7 @@ const AdminBookingList = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        alert('deleted successfully');
+                        handleSuccessModalOpen("Booking Deleted Successfully");
                         const remainingBookings = bookings.filter(booking => booking._id !== id);
                         setBookings(remainingBookings);
                     }
@@ -113,6 +120,13 @@ const AdminBookingList = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <ModalMessage
+                open={open}
+                setOpen={setOpen}
+                modalText={modalText}
+            >
+            </ModalMessage>
         </Box>
     );
 };

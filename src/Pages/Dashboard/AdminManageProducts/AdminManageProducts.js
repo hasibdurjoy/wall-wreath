@@ -6,9 +6,10 @@ import ModalMessage from '../ModalMessage/ModalMessage';
 
 const AdminManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const [updateSuccess, setUpdateSuccess] = useState(false);
-    const [modalText, setModalText] = useState('');
 
+    const [updateSuccess, setUpdateSuccess] = useState(false);
+
+    const [modalText, setModalText] = useState('');
     const [open, setOpen] = React.useState(false);
     const handleSuccessModalOpen = (text) => {
         setModalText(text);
@@ -51,7 +52,6 @@ const AdminManageProducts = () => {
                 setOpen={setOpen}
                 modalText={modalText}
             >
-
             </ModalMessage>
         </ Container>
     );

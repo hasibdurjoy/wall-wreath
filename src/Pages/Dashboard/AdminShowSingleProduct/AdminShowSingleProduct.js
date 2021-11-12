@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import StarRatings from 'react-star-ratings';
-import { useHistory } from 'react-router';
 import ProductUpdateModal from '../ProductUpdateModal/ProductUpdateModal';
 
 const AdminShowSingleProduct = ({ product, handleDeleteProduct, handleSuccessModalOpen, setUpdateSuccess }) => {
-    const [openBooking, setBookingOpen] = React.useState(false);
+    const [openBooking, setBookingOpen] = useState(false);
     const handleBookingOpen = () => setBookingOpen(true);
     const handleBookingClose = () => setBookingOpen(false);
-    const history = useHistory();
 
 
     return (

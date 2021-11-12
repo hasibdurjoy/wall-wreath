@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
 import { Button, Container, FormControlLabel, FormLabel, TextField, Typography } from '@mui/material';
 import { Box, fontWeight } from '@mui/system';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 import Alert from '@mui/material/Alert';
-import useAuth from '../../../hooks/useAuth';
 import { useForm } from "react-hook-form";
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 const AdminAddProduct = () => {
     const [addSuccess, setAddSuccess] = useState(false);
+
+    const [modalText, setModalText] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const handleSuccessModalOpen = (text) => {
+        setModalText(text);
+        setOpen(true);
+    };
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const onSubmit = data => {
@@ -24,6 +29,7 @@ const AdminAddProduct = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
+                    handleSuccessModalOpen("Successfully Added Product");
                     setAddSuccess(true);
                     reset();
                 }
@@ -117,11 +123,14 @@ const AdminAddProduct = () => {
                     >Add</Button>
 
                 </form>
-                {
-                    addSuccess && <Alert severity="success">Successfully added service</Alert>
-
-                }
             </Container>
+
+            <ModalMessage
+                open={open}
+                setOpen={setOpen}
+                modalText={modalText}
+            >
+            </ModalMessage>
         </div >
     );
 };
