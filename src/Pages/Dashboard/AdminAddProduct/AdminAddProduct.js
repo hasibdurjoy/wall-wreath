@@ -34,82 +34,91 @@ const AdminAddProduct = () => {
         <div>
             <Container sx={{ width: "60%", pb: 3 }} >
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    <TextField
+                        {...register("name")}
+                        required
+                        name="name"
+                        label="Product Name"
+                        type="texts"
+                        variant="outlined"
+                        sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
-                    <Box sx={{ mb: 3 }}>
-                        <input
+                    <TextField
+                        {...register("price")}
+                        required
+                        label="Price"
+                        id="outlined-basic"
+                        type="number"
+                        variant="outlined"
+                        sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
+
+                    <Box style={{ display: "flex", justifyContent: "space-between" }}>
+                        <TextField
+                            {...register("height")}
                             required
+                            label="height(inches)"
+                            id="outlined-basic"
+                            type="number"
+                            variant="outlined"
+                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
+
+                        <TextField
+                            {...register("width")}
+                            required
+                            label="width(inches)"
+                            id="outlined-basic"
+                            type="number"
+                            variant="outlined"
+                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
+                    </Box>
+
+                    <Box style={{ display: "flex", justifyContent: "space-between" }}>
+                        <TextField
+                            {...register("rating")}
+                            required
+                            label="rating"
+                            id="outlined-basic"
+                            type="number"
+                            variant="outlined"
+                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
+
+                        <TextField
+                            {...register("frame")}
+                            required
+                            label="frame"
+                            id="outlined-basic"
                             type="text"
-                            {...register("name", { required: true })}
-                            style={{ width: "100%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="name" />
+                            variant="outlined"
+                            sx={{ width: "49%", backgroundColor: "white", mb: 1 }} />
                     </Box>
 
-                    <Box sx={{ mb: 3 }}>
-                        <input
-                            required
-                            type="number"
-                            {...register("price", { required: true })}
-                            style={{ width: "100%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="price" />
-                    </Box>
+                    <TextField
+                        {...register("img")}
+                        required
+                        label="Image url"
+                        id="outlined-basic"
+                        type="texts"
+                        variant="outlined"
+                        sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
-                    <Box sx={{ mb: 3 }} style={{ display: "flex", justifyContent: "space-between" }}>
-                        <input
-                            required
-                            type="number"
-                            {...register("height", { required: true })}
-                            style={{ width: "49%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="height(inches)" />
-                        <input
-                            required
-                            type="number"
-                            {...register("width", { required: true })}
-                            style={{ width: "49%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="width(inches)" />
-                    </Box>
-
-                    <Box sx={{ mb: 3 }} style={{ display: "flex", justifyContent: "space-between" }}>
-                        <input
-                            required
-                            type="number"
-                            {...register("rating", { required: true })}
-                            style={{ width: "49%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="rating" />
-
-                        <select
-                            required
-                            {...register("frame", { required: true })}
-                            defaultChecked="withFrame"
-                            style={{ width: "49%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="name" >
-                            <option value="withFrame" selected>with frame</option>
-                            <option value="withOutFrame">without frame</option>
-                        </select>
-                    </Box>
-
-                    <Box sx={{ mb: 3 }}>
-                        <input
-                            required
-                            type="text"
-                            {...register("image", { required: true })}
-                            style={{ width: "100%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="image url" />
-                    </Box>
-
-                    <Box sx={{ mb: 3 }}>
-                        <input
-                            required
-                            type="text"
-                            {...register("about", { required: true })}
-                            style={{ width: "100%", backgroundColor: "white", padding: "10px 5px", border: 0, borderBottom: '2px solid', borderLeft: "2px solid" }}
-                            placeholder="description" />
-                    </Box>
+                    <TextField
+                        {...register("about")}
+                        required
+                        label="description"
+                        id="outlined-basic"
+                        type="texts"
+                        variant="outlined"
+                        sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
 
 
-                    <input type="submit" style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "100%", border: 0, borderBottom: '2px solid' }} />
+                    <Button
+                        type="submit"
+                        style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "100%" }} sx={{ my: 2 }}
+                    >Add</Button>
+
                 </form>
                 {
-                    addSuccess && <Alert severity="success">Successfully added product</Alert>
+                    addSuccess && <Alert severity="success">Successfully added service</Alert>
 
                 }
             </Container>

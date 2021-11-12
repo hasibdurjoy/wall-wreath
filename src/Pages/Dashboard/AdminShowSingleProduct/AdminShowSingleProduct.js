@@ -12,9 +12,7 @@ const AdminShowSingleProduct = ({ product, handleDeleteProduct }) => {
     const handleBookingOpen = () => setBookingOpen(true);
     const handleBookingClose = () => setBookingOpen(false);
     const history = useHistory();
-    const handleEditProduct = id => {
-        history.push(`/dashboard/manageProducts/${id}`)
-    }
+
 
     return (
         <Grid item xs={12} md={4}>
