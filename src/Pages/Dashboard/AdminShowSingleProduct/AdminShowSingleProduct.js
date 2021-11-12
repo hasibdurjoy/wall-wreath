@@ -17,8 +17,8 @@ const AdminShowSingleProduct = ({ product, handleDeleteProduct, handleSuccessMod
             <Paper elevation={3} className="product">
                 <img src={product.img} alt="" width="90%" height="300px" style={{ marginTop: "10px" }} />
                 <Typography variant="h6" >{product.name}</Typography>
-                <Box sx={{ display: "flex", justifyContent: "space-around", mt: 2, mb: 1 }}>
-                    <Typography variant="h6" >$ {product.price}</Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center", mt: 2, mb: 1 }}>
+                    <Typography variant="h6" sx={{ fontSize: 30, color: "#F63E7B", fontWeight: 900 }}>$ {product.price}</Typography>
                     <StarRatings
                         rating={parseFloat(product.rating)}
                         starDimension="20px"
@@ -29,12 +29,13 @@ const AdminShowSingleProduct = ({ product, handleDeleteProduct, handleSuccessMod
 
                 <Box sx={{ mx: 2, pb: 1 }} id="product-description">
                     <Box sx={{ display: "flex", justifyContent: "space-around" }} >
-                        <Typography variant="subtitle1"  >Height : {product.height} inches</Typography>
-                        <Typography variant="subtitle1"  >Width : {product.width} inches</Typography>
+                        <Typography variant="subtitle1" > <b>Height</b> : {product.height} inches</Typography>
+                        <Typography variant="subtitle1"  ><b>Width</b> : {product.width} inches</Typography>
                     </Box>
-                    <Typography variant="subtitle1"  >Frame : {product.frame} </Typography>
+                    <Typography variant="subtitle1"  ><b>Frame</b> : {product.frame} </Typography>
                     <Typography variant="subtitle1"  > {product.about} </Typography>
                 </Box>
+
                 <Box style={{ display: 'flex', justifyContent: "space-around" }}>
                     <Button onClick={handleBookingOpen} variant="contained" style={{ width: "30%", color: "white", padding: "10px" }} sx={{ my: 2 }}>Edit</Button>
                     <Button onClick={() => { handleDeleteProduct(product._id) }} type="contained" style={{ width: "30%", color: "white", backgroundColor: "#F63E7B", padding: "10px" }} sx={{ my: 2 }}>Delete</Button>
