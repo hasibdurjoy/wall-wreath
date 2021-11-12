@@ -27,7 +27,7 @@ const Products = () => {
             <Typography variant="h4" style={{ marginTop: 0 }} sx={{ fontWeight: 900, pb: 3 }}>Our Awesome <span style={{ color: "#F63E7B" }}>Products</span></Typography>
             <Grid container spacing={5}>
                 {
-                    products.slice(0, 6).map(product => <Product product={product} />)
+                    products.slice(0, 6).map(product => <Product product={product} key={product._id} />)
                 }
             </Grid>
             <Box sx={{ mt: 4, mb: 3 }}><Button onClick={handleSeeAll} variant="contained" style={{ width: "30%", color: "white", backgroundColor: "#F63E7B", padding: "10px" }}>See All Products</Button></Box>

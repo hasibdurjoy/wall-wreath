@@ -1,4 +1,5 @@
 import { CircularProgress, Container, Grid } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import AdminShowSingleProduct from '../AdminShowSingleProduct/AdminShowSingleProduct';
 import ModalMessage from '../ModalMessage/ModalMessage';
@@ -26,7 +27,7 @@ const AdminManageProducts = () => {
     }, [updateSuccess]);
 
     const handleDeleteProduct = (id) => {
-        const proceed = window.confirm('Are you sure, you want to cancel?');
+        const proceed = window.confirm('Are you sure, you want to delete?');
         if (proceed) {
             const url = `https://salty-ravine-02871.herokuapp.com/products/${id}`;
             fetch(url, {
@@ -46,11 +47,13 @@ const AdminManageProducts = () => {
         <Container sx={{ mt: 0 }}>
             <Grid container spacing={5}>
                 {
-                    products.map(product => <AdminShowSingleProduct product={product} handleDeleteProduct={handleDeleteProduct} handleSuccessModalOpen={handleSuccessModalOpen} setUpdateSuccess={setUpdateSuccess} />)
+                    products.map(product => <AdminShowSingleProduct product={product} key={product._id} handleDeleteProduct={handleDeleteProduct} handleSuccessModalOpen={handleSuccessModalOpen} setUpdateSuccess={setUpdateSuccess} />)
                 }
             </Grid>
 
-            {loading && <CircularProgress color="success" />}
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mt: 10 }}>
+                {loading && <CircularProgress color="success" />}
+            </Box>
 
             <ModalMessage
                 open={open}

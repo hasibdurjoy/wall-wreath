@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import StarRatings from 'react-star-ratings';
 import { useHistory } from 'react-router';
 
 const Product = ({ product }) => {
     const history = useHistory();
-    const [seeMore, setSeeMore] = useState(false)
 
-    const seeMoreButton = () => {
-        setSeeMore(true);
-    }
     const handleClick = (id) => {
         history.push(`/products/${id}`)
     }

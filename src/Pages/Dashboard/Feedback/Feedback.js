@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { Button, Container, TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import { Button, Container } from '@mui/material';
 import { FaStar } from 'react-icons/fa';
 import Alert from '@mui/material/Alert';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import useAuth from '../../../hooks/useAuth';
 import './Feedback.css';
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 const Feedback = () => {
     const { user } = useAuth();
     const [reviewSuccess, setReviewSuccess] = useState(false);
     const history = useHistory();
+    const [modalText, setModalText] = useState('');
+
+    const [open, setOpen] = React.useState(false);
+    const handleSuccessModalOpen = (text) => {
+        setModalText(text);
+        setOpen(true);
+    };
 
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
@@ -40,7 +47,7 @@ const Feedback = () => {
                 .then(result => {
                     if (result.insertedId) {
                         setReviewSuccess(true);
-                        alert('successfully added');
+                        handleSuccessModalOpen("Thank you for your comment");
                     }
                 })
         };
@@ -51,9 +58,6 @@ const Feedback = () => {
         e.preventDefault();
     }
 
-    if (reviewSuccess) {
-        history.push("/");
-    }
 
     return (
         <Container sx={{ width: "50%", pb: 3, mx: 'auto' }} >
@@ -98,10 +102,12 @@ const Feedback = () => {
 
 
             </form>
-            {
-                reviewSuccess && <Alert severity="success">Successfully Booked</Alert>
-
-            }
+            <ModalMessage
+                open={open}
+                setOpen={setOpen}
+                modalText={modalText}
+            >
+            </ModalMessage>
         </Container>
     );
 };

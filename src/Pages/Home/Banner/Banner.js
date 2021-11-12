@@ -2,8 +2,6 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
@@ -14,24 +12,20 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
     {
-        label: 'San Francisco – Oakland Bay Bridge, United States',
         imgPath:
-            'https://adorable-home.com/wp-content/gallery/posters-an-artistic-and-affordable-way-to-decorate/affordable-home-decoration-with-posters-1.jpg',
+            'https://i.ibb.co/23Sm5f4/1ce389d011d6590360142de7c48879e487309d31-1.jpg',
     },
     {
-        label: 'Bird',
         imgPath:
-            'https://stylegirlfriend.com/wp-content/uploads/2016/07/1ce389d011d6590360142de7c48879e487309d31-1.jpeg',
+            'https://i.ibb.co/9nhd7wz/Gallery-wall-with-concert-posters-and-more.jpg',
     },
     {
-        label: 'Bali, Indonesia',
         imgPath:
-            'https://b-metro.com/wp-content/uploads/2019/01/Gallery-wall-with-concert-posters-and-more.jpg',
+            'https://i.ibb.co/W0DX9K1/living-room-posters.jpg',
     },
     {
-        label: 'Goč, Serbia',
         imgPath:
-            'https://essentialhome.eu/inspirations/wp-content/uploads/2018/06/living-room-posters.jpg',
+            'https://i.ibb.co/jWVQ6vF/affordable-home-decoration-with-posters-1.jpg',
     },
 ];
 const Banner = () => {

@@ -1,7 +1,6 @@
 import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
-import { Box, fontWeight } from '@mui/system';
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
 
@@ -67,6 +66,7 @@ const Login = () => {
 
                         <NavLink style={{ textDecoration: 'none' }} to='/register'><Button style={{ color: 'black' }} sx={{ my: 2 }} variant="text">New User? Please Register</Button></NavLink>
                     </form>
+
                     {isLoading && <CircularProgress />}
                     {user?.email && <Alert severity="success">User Created Successfully!</Alert>}
                     {authError && <Alert severity="error">Invalid Username or password</Alert>}

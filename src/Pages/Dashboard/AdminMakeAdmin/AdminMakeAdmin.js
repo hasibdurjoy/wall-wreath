@@ -115,8 +115,8 @@ const AdminMakeAdmin = () => {
                         ))}
                     </TableBody>
                 </Table>
-                {loading && <CircularProgress color="success" />}
             </TableContainer>
+            {loading && <CircularProgress color="success" />}
 
             <ModalMessage
                 open={open}

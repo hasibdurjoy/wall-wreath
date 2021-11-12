@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { Button, Container, TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import Alert from '@mui/material/Alert';
+import { useParams } from 'react-router';
+import { Button, Container, TextField } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
 import { useForm } from "react-hook-form";
 import ModalMessage from '../../Dashboard/ModalMessage/ModalMessage';
@@ -11,8 +9,6 @@ const Book = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState({});
     const { user } = useAuth();
-    const [bookingSuccess, setBookingSuccess] = useState(false);
-    const history = useHistory();
 
 
     const [modalText, setModalText] = useState('');
@@ -58,7 +54,6 @@ const Book = () => {
                 .then(data => {
                     if (data.insertedId) {
                         handleSuccessModalOpen("Booked Successfully");
-                        setBookingSuccess(true);
                         reset();
                     }
                 });

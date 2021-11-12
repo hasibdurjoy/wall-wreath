@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Container, FormControlLabel, FormLabel, TextField, Typography } from '@mui/material';
-import { Box, fontWeight } from '@mui/system';
+import React, { useState } from 'react';
+import { Button, Container, TextField } from '@mui/material';
+import { Box } from '@mui/system';
 import { useForm } from "react-hook-form";
 import ModalMessage from '../ModalMessage/ModalMessage';
 
@@ -8,6 +8,7 @@ const AdminAddProduct = () => {
     const [addSuccess, setAddSuccess] = useState(false);
 
     const [modalText, setModalText] = useState('');
+
     const [open, setOpen] = React.useState(false);
     const handleSuccessModalOpen = (text) => {
         setModalText(text);

@@ -7,10 +7,8 @@ import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
-    Link,
     useRouteMatch,
     NavLink
 } from "react-router-dom";
@@ -28,7 +26,7 @@ import AdminRoute from '../../Login/AdminRoute/AdminRoute';
 const drawerWidth = 240;
 
 function Dashboard(props) {
-    const { user, logOut, admin } = useAuth();
+    const { logOut, admin } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [bannerText, setBannerText] = React.useState("Dashboard");
@@ -58,28 +56,28 @@ function Dashboard(props) {
                             onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/manageBookings`}
-                            style={{ textDecoration: "none", }}>
+                            style={{ textDecoration: "none", color: "black" }}>
                             Bookings</NavLink><br />
 
                         <NavLink
                             onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/makeAdmin`}
-                            style={{ textDecoration: "none", }}>
+                            style={{ textDecoration: "none", color: "black" }}>
                             Make Admin</NavLink ><br />
 
                         <NavLink
                             onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/addProduct`}
-                            style={{ textDecoration: "none", }}>
+                            style={{ textDecoration: "none", color: "black" }}>
                             Add New Product</NavLink ><br />
 
                         <NavLink
                             onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/manageProducts`}
-                            style={{ textDecoration: "none", }}>
+                            style={{ textDecoration: "none", color: "black" }}>
                             Manage Products</NavLink ><br />
 
                     </>
@@ -90,21 +88,21 @@ function Dashboard(props) {
                                 onClick={handleBannerText}
                                 activeStyle={activeStyle}
                                 to={`${url}/pay`}
-                                style={{ textDecoration: "none", }}>
+                                style={{ textDecoration: "none", color: "black" }}>
                                 Pay</NavLink ><br />
 
                             <NavLink
                                 onClick={handleBannerText}
                                 activeStyle={activeStyle}
                                 to={`${url}/myOrders`}
-                                style={{ textDecoration: "none", }}>
+                                style={{ textDecoration: "none", color: "black" }}>
                                 My Orders</NavLink ><br />
 
                             <NavLink
                                 onClick={handleBannerText}
                                 activeStyle={activeStyle}
                                 to={`${url}/review`}
-                                style={{ textDecoration: "none", }}>
+                                style={{ textDecoration: "none", color: "black" }}>
                                 Review</NavLink ><br />
                         </>
                 }

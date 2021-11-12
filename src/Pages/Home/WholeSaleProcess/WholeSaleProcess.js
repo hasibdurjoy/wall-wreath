@@ -1,6 +1,4 @@
 import React from 'react';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import { Container, Typography } from '@mui/material';
 
 const WholeSaleProcess = () => {

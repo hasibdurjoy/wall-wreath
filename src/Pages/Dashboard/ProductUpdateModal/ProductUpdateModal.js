@@ -6,7 +6,6 @@ import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import useAuth from './../../../hooks/useAuth';
 
 const style = {
     position: 'absolute',
@@ -37,7 +36,7 @@ export default function ProductUpdateModal({ product, openBooking, handleBooking
     const handleBookingSubmit = e => {
 
         console.log(bookingInfo);
-        const proceed = window.confirm('Are you want to approve this booking??');
+        const proceed = window.confirm('Are you want to update this product??');
         if (proceed) {
             const url = `https://salty-ravine-02871.herokuapp.com/products/${_id}`;
             fetch(url, {

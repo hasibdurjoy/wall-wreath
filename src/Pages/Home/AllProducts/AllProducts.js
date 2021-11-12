@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { CircularProgress, Container, Typography } from '@mui/material';
 import Product from '../Product/Product';
+import { Box } from '@mui/system';
 
 const AllProducts = () => {
     const [loading, setLoading] = useState(true);
@@ -22,7 +23,11 @@ const AllProducts = () => {
                     products.map(product => <Product product={product} />)
                 }
             </Grid>
-            {loading && <CircularProgress color="success" />}
+
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mt: 10 }}>
+                {loading && <CircularProgress color="success" />}
+            </Box>
+
         </ Container>
     );
 };
