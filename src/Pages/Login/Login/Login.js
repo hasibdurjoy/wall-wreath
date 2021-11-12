@@ -1,7 +1,7 @@
-import { Button, Container, TextField, Typography } from '@mui/material';
+import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import { Box, fontWeight } from '@mui/system';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
 
@@ -29,52 +29,50 @@ const Login = () => {
     const signInWithGoogle = () => {
         logInWithGoogle(location, history);
     }
+
     return (
-        <Box sx={{ my: 2 }}>
-            <Container sx={{ width: "35%", pt: 3, pb: 3 }} style={{ border: "1px solid black" }}>
-                <img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" />
-                <Typography variant="h6" sx={{ textAlign: "left", fontWeight: 900 }}>Log In</Typography>
-                <form onSubmit={handleLogInSubmit}>
-                    <TextField
-                        onBlur={handleOnChange}
-                        id="outlined-basic"
-                        type="email"
-                        name="email"
-                        label="Email"
-                        variant="standard"
-                        sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
-                    <TextField
-                        onBlur={handleOnChange}
-                        id="outlined-basic"
-                        type="password"
-                        name="password"
-                        label="Password"
-                        variant="standard"
-                        sx={{ width: "100%", backgroundColor: "white", mb: 1 }} />
+        <Container>
+            <Grid container spacing={1}>
+                <Grid item sx={{ boxShadow: 3, mx: 'auto' }} xs={12} md={6}>
+                    <img style={{ width: "200px" }} src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" />
+                    <Typography variant="h6" sx={{ textAlign: "center", fontWeight: 900 }}>Login</Typography>
 
-                    <Button
-                        type="submit"
-                        style={{ color: "white", backgroundColor: "#F63E7B", padding: "10px", width: "100%" }} sx={{ my: 2 }}
-                    >Login</Button>
+                    <form onSubmit={handleLogInSubmit}>
+                        <TextField
+                            sx={{ width: "75%", m: 1 }}
+                            name="email"
+                            type="email"
+                            onChange={handleOnChange}
+                            label="Your Email"
+                            id="outlined-size-small"
+                            size="small"
+                            variant="standard"
 
-                    <Link to="/register">Don't Have an Account ? <span style={{ color: "#F63E7B" }}>Register now</span></Link>
+                        />
+                        <TextField
+                            sx={{ width: "75%", m: 1 }}
+                            id="outlined-size-small"
+                            label="Your Password"
+                            name="password"
+                            onChange={handleOnChange}
+                            variant="standard"
+                            type="password"
+                            size="small" />
 
-                </form>
+                        <Button variant="contained" sx={{ width: "75%", m: 1 }} style={{ backgroundColor: "#F63E7B" }} type="submit">Login</Button> <br />
 
-            </Container>
+                        <Button style={{ color: '#F63E7B' }} sx={{ my: 2 }} variant="text">--------------------- OR ---------------------</Button> <br />
 
-            <Container sx={{ width: "35%", pt: 1, pb: 3 }}>
-                <Typography sx={{ mt: 3 }}>---------------------------------Or Log in using---------------------------------</Typography>
+                        <Button style={{ borderColor: '#F63E7B', color: '#F63E7B' }} onClick={signInWithGoogle} sx={{ width: "75%", m: 1 }} variant="outlined"><img src="https://i.ibb.co/kMP3qmn/Group-573.png" alt="" style={{ width: '25px' }} />  Sign In With Google</Button> <br />
 
-                <Button
-                    onClick={signInWithGoogle}
-                    type="contained"
-                    style={{ color: "black", backgroundColor: "white", padding: "5px 10px", width: "100%", borderRadius: "20px", border: "1px solid black", display: "flex", justifyContent: "space-around" }}
-                    sx={{ mt: 2 }}>
-                    <img src="https://i.ibb.co/kMP3qmn/Group-573.png" alt="" width="25px" /> Login with google
-                </Button>
-            </Container>
-        </Box>
+                        <NavLink style={{ textDecoration: 'none' }} to='/register'><Button style={{ color: 'black' }} sx={{ my: 2 }} variant="text">New User? Please Register</Button></NavLink>
+                    </form>
+                    {isLoading && <CircularProgress />}
+                    {user?.email && <Alert severity="success">User Created Successfully!</Alert>}
+                    {authError && <Alert severity="error">{authError}</Alert>}
+                </Grid>
+            </Grid>
+        </Container>
     );
 };
 

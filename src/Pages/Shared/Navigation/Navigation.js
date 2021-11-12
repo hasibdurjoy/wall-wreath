@@ -21,9 +21,9 @@ const Navigation = () => {
                         aria-label="menu"
                         sx={{ mr: 2 }}
                     >
-                        <NavLink to="/"><img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" /></NavLink>
 
                     </IconButton>
+                    <NavLink to="/"><img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" /></NavLink>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 
                     </Typography>
@@ -35,13 +35,13 @@ const Navigation = () => {
                     {
                         user?.email ? <>
                             <NavLink to="/dashboard" style={{ textDecoration: "none" }}><Button style={{ color: "black" }} type="contained">Dashboard</Button></NavLink>
-                            <Button variant="contained" style={{ backgroundColor: "white", color: "black" }}>{user.displayName}</Button>
-                            <Button onClick={logOut} variant="contained" style={{ color: "white" }}>Logout</Button>
+                            <Button variant="contained" style={{ backgroundColor: "white", color: "black", marginRight: "5px", boxShadow: "none" }}>{user.displayName}</Button>
+                            <Button onClick={logOut} style={{ color: "white", backgroundColor: "#F63E7B" }}>Logout</Button>
                         </>
 
                             :
                             <>
-                                <NavLink to="/login" style={{ textDecoration: "none", backgroundColor: "blue", borderRadius: "20px", padding: "3px 20px" }}><Button type="contained" style={{ color: "white" }}>Login</Button></NavLink>
+                                <NavLink to="/login" style={{ textDecoration: "none", backgroundColor: "blue", borderRadius: "20px" }}><Button type="contained" style={{ color: "white", backgroundColor: "#F63E7B" }}>Login</Button></NavLink>
                             </>
                     }
 

@@ -19,7 +19,7 @@ const Product = ({ product }) => {
     return (
         <Grid item xs={12} md={4}>
             <Paper elevation={3} className="product">
-                <img src={product.img} alt="" width="300px" height="300px" style={{ marginTop: "20px" }} />
+                <img src={product.img} alt="" width="90%" height="300px" style={{ marginTop: "10px" }} />
                 <Typography variant="h6" >{product.name}</Typography>
                 <Typography variant="h6" sx={{ my: 2 }}>$ {product.price}</Typography>
                 <Box sx={{ mx: 2, pb: 3 }} id="product-description">
