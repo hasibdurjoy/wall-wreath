@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import ModalMessage from '../ModalMessage/ModalMessage';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,6 +33,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const AdminBookingList = () => {
     const [bookings, setBookings] = useState([]);
     const [updateSuccess, setUpdateSuccess] = useState(false);
+    const [loading, setLoading] = useState(true);
+
     const [modalText, setModalText] = useState('');
     const [open, setOpen] = React.useState(false);
     const handleSuccessModalOpen = (text) => {
@@ -43,7 +45,10 @@ const AdminBookingList = () => {
     useEffect(() => {
         fetch('https://salty-ravine-02871.herokuapp.com/allBookings')
             .then(res => res.json())
-            .then(data => setBookings(data))
+            .then(data => {
+                setBookings(data)
+                setLoading(false)
+            })
     }, [updateSuccess])
 
     const approveBooking = (id) => {
@@ -119,6 +124,7 @@ const AdminBookingList = () => {
                         ))}
                     </TableBody>
                 </Table>
+                {loading && <CircularProgress color="success" />}
             </TableContainer>
 
             <ModalMessage

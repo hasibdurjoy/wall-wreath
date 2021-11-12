@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TextField, Button, Alert, AlertTitle, Typography } from '@mui/material';
+import { TextField, Button, Alert, AlertTitle, Typography, CircularProgress } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -37,7 +37,7 @@ const AdminMakeAdmin = () => {
     const [admins, setAdmins] = useState([]);
     const [success, setSuccess] = useState(false);
     const { authToken } = useAuth();
-
+    const [loading, setLoading] = useState(true);
 
     const [modalText, setModalText] = useState('');
     const [open, setOpen] = React.useState(false);
@@ -74,7 +74,10 @@ const AdminMakeAdmin = () => {
     useEffect(() => {
         fetch('https://salty-ravine-02871.herokuapp.com/users/?role=admin')
             .then(res => res.json())
-            .then(data => setAdmins(data))
+            .then(data => {
+                setAdmins(data)
+                setLoading(false);
+            })
     }, [success])
 
     return (
@@ -112,6 +115,7 @@ const AdminMakeAdmin = () => {
                         ))}
                     </TableBody>
                 </Table>
+                {loading && <CircularProgress color="success" />}
             </TableContainer>
 
             <ModalMessage

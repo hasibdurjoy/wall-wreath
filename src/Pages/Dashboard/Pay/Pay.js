@@ -33,8 +33,7 @@ const Pay = () => {
                     />
 
                     <TextField
-                        {...register("name")}
-                        required
+                        {...register("account")}
                         label="Amount"
                         id="outlined-basic"
                         type="number"
@@ -43,7 +42,6 @@ const Pay = () => {
 
                     <TextField
                         {...register("txn_id")}
-                        required
                         label="Transaction "
                         id="outlined-basic"
                         type="text"

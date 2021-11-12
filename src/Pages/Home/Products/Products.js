@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
-import { Container, Typography } from '@mui/material';
+import { CircularProgress, Container, Typography } from '@mui/material';
 import Product from '../Product/Product';
 
 const Products = () => {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         fetch('https://salty-ravine-02871.herokuapp.com/products')
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => {
+                setProducts(data);
+                setLoading(false);
+            })
     }, []);
     return (
         <Container sx={{ mt: 0 }}>
@@ -18,6 +23,7 @@ const Products = () => {
                     products.slice(0, 6).map(product => <Product product={product} />)
                 }
             </Grid>
+            {loading && <CircularProgress color="success" />}
         </ Container>
     );
 };
