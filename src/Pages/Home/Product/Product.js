@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import { Button, Container, Typography } from '@mui/material';
 import StarRatings from 'react-star-ratings';
 import { useHistory } from 'react-router';
-import './Product.css';
+
 const Product = ({ product }) => {
     const history = useHistory();
     const [seeMore, setSeeMore] = useState(false)

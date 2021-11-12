@@ -2,25 +2,26 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
+import './Navigation.css';
 
 const Navigation = () => {
     const { user, logOut } = useAuth();
+
     return (
         <>
             <nav className="navbar container navbar-expand-lg navbar-light bg-transperent" >
                 <div className="container-fluid">
-                    <NavLink to="/"><img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" /></NavLink>
+                    <NavLink to="/" ><img src="https://i.ibb.co/QMqQRbF/Screenshot-19-removebg-preview.png" alt="" width="200px" /></NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <NavLink to="/home" style={{ textDecoration: "none" }}><Button style={{ color: "black" }} type="contained">Home</Button></NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink to="/products" style={{ textDecoration: "none" }}><Button style={{ color: "black" }} type="contained">Products</Button></NavLink>
-                            </li>
+
+                            <NavLink to="/home" style={{ textDecoration: "none" }} ><Button style={{ color: "black" }} type="contained">Home</Button></NavLink>
+
+                            <NavLink to="/products" style={{ textDecoration: "none" }}><Button style={{ color: "black" }} type="contained">Products</Button></NavLink>
+
                             {
                                 user?.email ? <>
                                     <NavLink to="/dashboard" style={{ textDecoration: "none" }}><Button style={{ color: "black" }} type="contained">Dashboard</Button></NavLink>
