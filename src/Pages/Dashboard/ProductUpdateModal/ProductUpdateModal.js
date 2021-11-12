@@ -52,7 +52,7 @@ export default function ProductUpdateModal({ product, openBooking, handleBooking
                     if (data.modifiedCount > 0) {
                         setUpdateSuccess(true);
                         handleBookingClose();
-                        handleSuccessModalOpen();
+                        handleSuccessModalOpen("Product Updated Successfully");
                     }
                 })
         }
