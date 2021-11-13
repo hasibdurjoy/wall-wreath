@@ -26,7 +26,7 @@ import AdminRoute from '../../Login/AdminRoute/AdminRoute';
 const drawerWidth = 240;
 
 function Dashboard(props) {
-    const { logOut, admin } = useAuth();
+    const { user, logOut, admin } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [bannerText, setBannerText] = React.useState("Dashboard");
@@ -46,18 +46,23 @@ function Dashboard(props) {
 
     const drawer = (
         <div>
-            <Toolbar />
+            <Toolbar sx={{ backgroundColor: "#1976d2", color: "white" }} >
+                <Typography variant="h6" noWrap component="div">
+                    Dashboard
+                </Typography>
+            </Toolbar>
             <Divider />
-            <Box sx={{ textAlign: "left", ml: 2, fontWeight: 900, fontSize: 18 }}>
-                <NavLink to="/home" style={{ marginRight: "20px", textDecoration: "none", }}>Home</NavLink> <br />
+            <Box sx={{ textAlign: "left", ml: 2, fontWeight: 600, fontSize: 17, py: 2 }}>
+                <NavLink to="/home" style={{ marginRight: "20px", textDecoration: "none", color: "black" }}>Home</NavLink> <br />
                 {
                     admin ? <>
                         <NavLink
                             onClick={handleBannerText}
                             activeStyle={activeStyle}
                             to={`${url}/manageBookings`}
-                            style={{ textDecoration: "none", color: "black" }}>
-                            Bookings</NavLink><br />
+                            style={{ textDecoration: "none", color: "black" }}
+                        >
+                            Manage Bookings</NavLink><br />
 
                         <NavLink
                             onClick={handleBannerText}
@@ -126,7 +131,7 @@ function Dashboard(props) {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar>
+                <Toolbar >
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -136,9 +141,14 @@ function Dashboard(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        {bannerText}
-                    </Typography>
+                    <Box width="100%" sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="h6" noWrap component="div">
+                            {bannerText}
+                        </Typography>
+                        <Typography variant="h6" noWrap component="div">
+                            {user.displayName}
+                        </Typography>
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Box

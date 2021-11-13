@@ -30,7 +30,7 @@ const Navigation = () => {
 
                                     :
                                     <>
-                                        <NavLink to="/login" style={{ textDecoration: "none", backgroundColor: "blue", borderRadius: "20px" }}><Button type="contained" style={{ color: "white", backgroundColor: "#F63E7B" }}>Login</Button></NavLink>
+                                        <NavLink to="/login" style={{ textDecoration: "none", borderRadius: "20px" }}><Button type="contained" style={{ color: "white", backgroundColor: "#F63E7B" }}>Login</Button></NavLink>
                                     </>
                             }
                         </ul>

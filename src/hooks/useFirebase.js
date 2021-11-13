@@ -19,6 +19,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [isAdminLoading, setAdminIsLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
     const [authToken, setAuthToken] = useState('');
 
@@ -105,10 +106,12 @@ const useFirebase = () => {
     }, []);
 
     useEffect(() => {
+        setAdminIsLoading(true);
         fetch(`https://salty-ravine-02871.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin);
+                setAdminIsLoading(false);
             })
     }, [user.email]);
 
@@ -138,6 +141,7 @@ const useFirebase = () => {
         admin,
         authToken,
         isLoading,
+        isAdminLoading,
         authError,
         registerUser,
         loginUser,
